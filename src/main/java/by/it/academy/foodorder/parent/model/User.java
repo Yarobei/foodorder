@@ -25,4 +25,15 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude @ToString.Exclude
     private List<Basket> basket = new ArrayList<>();
+
+    public User(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
