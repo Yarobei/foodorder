@@ -13,16 +13,18 @@ public interface UserService {
 
     User getByUsername(String username);
 
-    Optional<User> getUserById(Long id);
+    User getUserById(Long id);
 
     void deleteUserById (Long id);
 
     void deleteUser (User user);
 
-    void updateUser (User user);
+    void updateUser (Long id);
 
     List<User> getAllUsers();
 
-    User findByUsernameAndPassword(String name, String password);
+    Optional<User> findByUsernameAndPassword(String name, String password);
+
+    boolean existsByUsername(String name);
 
 }

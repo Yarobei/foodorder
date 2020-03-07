@@ -17,13 +17,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-
     @Override
     public boolean addUser(User user) {
-        User userFromDB = userRepository.findByUsername(user.getUsername());
-        if (userFromDB != null) {
-            return false;
-        }
+        user.setRole("user");
         userRepository.save(user);
         return true;
     }
@@ -34,8 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
+    public User getUserById(Long id) {
+        return userRepository.getByUserId(id);
     }
 
     @Override
@@ -53,8 +49,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(User user) {
-        if(userRepository.existsById(user.getUserId())){
+    public void updateUser(Long id) {
+        User user = userRepository.findByUserId(Long.valueOf(id));
+        if(userRepository.existsById(Long.valueOf(id))){
             userRepository.delete(user);
             log.info("Update user: {}", user);
             userRepository.save(user);
@@ -70,8 +67,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsernameAndPassword(String name, String password) {
+    public Optional<User> findByUsernameAndPassword(String name, String password) {
         return userRepository.findByUsernameAndPassword(name, password);
     }
+
+    @Override
+    public boolean existsByUsername(String name) {
+        return !userRepository.existsByUsername(name);
+    }
+
 
 }

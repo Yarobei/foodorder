@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Person List</title>
+</head>
+<body>
+<h1>User List</h1>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Password</th>
+            <th>Role</th>
+        </tr>
+        <tr th:each ="user : ${users}">
+            <td th:utext="${user.username}">...</td>
+            <td th:utext="${user.password}">...</td>
+            <td th:utext="${user.role}">...</td>
+            <td>
+                <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
+                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/updateUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
+                    <input type="submit" value="Update"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
