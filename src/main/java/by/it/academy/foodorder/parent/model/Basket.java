@@ -13,13 +13,19 @@ import java.util.List;
 @Builder
 @Entity
 public class Basket {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "basket_id")
     private Long basketId;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @PrimaryKeyJoinColumn
+    @Access(AccessType.PROPERTY)
     private User user;
+
     @ManyToMany(mappedBy = "basket", fetch = FetchType.LAZY)
-    private List<Food> food = new ArrayList<>();
+    @EqualsAndHashCode.Exclude @ToString.Exclude
+    private List<Food> food;
 
 }

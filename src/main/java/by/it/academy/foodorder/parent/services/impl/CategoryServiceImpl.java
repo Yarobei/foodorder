@@ -23,8 +23,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<Category> getCategoryById(Integer id) {
-        return categoryRepository.findAllByCategoryId(id);
+    public Category getCategoryById(Long id) {
+        return categoryRepository.findByCategoryId(id);
     }
 }
 

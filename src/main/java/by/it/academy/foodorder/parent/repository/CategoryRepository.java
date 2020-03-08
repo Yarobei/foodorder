@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
-    Optional<Category> findAllByCategoryId(Integer id);
+    Category findByCategoryId(Long id);
 
 }

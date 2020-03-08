@@ -13,18 +13,26 @@ import java.util.List;
 @Builder
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
+    @EqualsAndHashCode.Exclude
     private Long userId;
+
     @Column
     private String username;
+
     @Column
     private String role;
+
     @Column
     private String password;
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Access(AccessType.PROPERTY)
     @EqualsAndHashCode.Exclude @ToString.Exclude
-    private List<Basket> basket = new ArrayList<>();
+    private Basket basket;
 
     public User(String username, String password, String role) {
         this.username = username;

@@ -2,7 +2,9 @@ package by.it.academy.foodorder.parent.services.impl;
 
 import by.it.academy.foodorder.parent.model.Category;
 import by.it.academy.foodorder.parent.model.Food;
+import by.it.academy.foodorder.parent.repository.CategoryRepository;
 import by.it.academy.foodorder.parent.repository.FoodRepository;
+import by.it.academy.foodorder.parent.services.interfaces.CategoryService;
 import by.it.academy.foodorder.parent.services.interfaces.FoodService;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +21,9 @@ public class FoodServiceImpl implements FoodService {
     @Autowired
     private FoodRepository foodRepository;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @Override
     public List<Food> getAllDishes() {
         return (List<Food>) foodRepository.findAll();
@@ -26,8 +31,9 @@ public class FoodServiceImpl implements FoodService {
 
 
     @Override
-    public Food addNewDishes(@NonNull Food food) {
+    public Food addNewDishes(Food food) {
         log.info("Add new food: {}", food);
+        food.setCategory(categoryService.getCategoryById(food.getCategory().getCategoryId()));
         return foodRepository.save(food);
     }
 

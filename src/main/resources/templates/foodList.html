@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Person List</title>
+</head>
+<body>
+<h1>Food List</h1>
+<br/><br/>
+<a href="/addFood">Add Food</a>
+<div>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Ingredients</th>
+            <th>Cooking Time</th>
+            <th>Weight</th>
+            <th>Discount</th>
+            <th>Delivery</th>
+        </tr>
+        <tr th:each ="food : ${foodList}">
+            <td th:utext="${food.name}">...</td>
+            <td th:utext="${food.category.categoryName}">...</td>
+            <td th:utext="${food.price}">...</td>
+            <td th:utext="${food.ingredients}">...</td>
+            <td th:utext="${food.cookingTime}">...</td>
+            <td th:utext="${food.weight}">...</td>
+            <td th:utext="${food.discount}">...</td>
+            <td th:utext="${food.delivery}">...</td>
+            <td>
+                <form th:action="@{/deleteFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
+                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
