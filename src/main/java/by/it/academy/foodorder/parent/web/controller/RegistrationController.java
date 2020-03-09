@@ -1,47 +1,57 @@
 package by.it.academy.foodorder.parent.web.controller;
 
 import by.it.academy.foodorder.parent.model.User;
+import by.it.academy.foodorder.parent.services.interfaces.SecurityService;
 import by.it.academy.foodorder.parent.services.interfaces.UserService;
-import lombok.extern.slf4j.Slf4j;
+import by.it.academy.foodorder.parent.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-@Slf4j
 public class RegistrationController {
-
-    private String errorMessage;
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.GET)
-    public String getRegistrationUser(Model model){
-        model.addAttribute("user", new User());
-        return "signUp";
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private UserValidator userValidator;
+
+    @GetMapping(value = "/registration")
+    public String registration(Model model){
+        model.addAttribute("userForm", new User());
+        return "registration";
     }
 
-    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public String saveRegistrationUser(Model model,
-                                       @ModelAttribute("user") User user) {
-        if (user.getUsername() == null || user.getUsername().length() == 0 ||
-                user.getPassword() == null || user.getPassword().length() == 0) {
-            errorMessage = "Incorrect data, please fill in all forms";
-            model.addAttribute("errorMessage", errorMessage);
-            return "signUp";
-        } else if (!userService.existsByUsername(user.getUsername())) {
-            errorMessage = "Name is already exists";
-            model.addAttribute("errorMessage", errorMessage);
-            return "signUp";
-        } else {
-            userService.addUser(user);
-            return "redirect:/";
-        }
+    @PostMapping(value = "/registration")
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult){
+            userValidator.validate(userForm, bindingResult);
+
+            if(bindingResult.hasErrors()){
+                return "registration";
+            }
+            userService.saveUser(userForm);
+            securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
+            return "redirect:/welcome";
     }
+
+    @GetMapping(value = "/login")
+    public String login(Model model, String error, String logout){
+        if(error != null){
+            model.addAttribute("error", "Username and password is invalid");
+        }
+        if(logout != null){
+            model.addAttribute("message", "Logged out successfully");
+        }
+        return "login";
+    }
+
 
 }
-
