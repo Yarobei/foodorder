@@ -9,7 +9,7 @@ import java.util.Optional;
 @Service
 public interface UserService {
 
-    boolean addUser(User user);
+    void saveUser(User user);
 
     User getByUsername(String username);
 

@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -24,24 +26,18 @@ public class User {
     private String username;
 
     @Column
-    private String role;
+    @ManyToMany
+    private Set<Role> roles;
 
     @Column
     private String password;
+
+    @Transient
+    @Column(name = "password_confirm")
+    private String passwordConfirm;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Access(AccessType.PROPERTY)
     @EqualsAndHashCode.Exclude @ToString.Exclude
     private Basket basket;
-
-    public User(String username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 }

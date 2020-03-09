@@ -1,12 +1,17 @@
 package by.it.academy.foodorder.parent.services.impl;
 
+import by.it.academy.foodorder.parent.model.Role;
 import by.it.academy.foodorder.parent.model.User;
+import by.it.academy.foodorder.parent.repository.RoleRepository;
 import by.it.academy.foodorder.parent.repository.UserRepository;
 import by.it.academy.foodorder.parent.services.interfaces.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +22,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Override
-    public boolean addUser(User user) {
-        user.setRole("user");
+    public void saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(new HashSet<>(roleRepository.findAll()));
         userRepository.save(user);
-        return true;
     }
 
     @Override

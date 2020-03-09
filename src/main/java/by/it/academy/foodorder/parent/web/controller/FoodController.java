@@ -59,7 +59,7 @@ public class FoodController {
             return "addFood";
         }else{
             foodService.addNewDishes(food);
-            return "redirect:/";
+            return "redirect:/welcome";
         }
     }
 
