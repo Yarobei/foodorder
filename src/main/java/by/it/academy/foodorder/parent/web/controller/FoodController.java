@@ -17,13 +17,13 @@ import java.util.List;
 @Controller
 public class FoodController {
 
-    private String errorMessage;
-
     @Autowired
     private FoodService foodService;
 
     @Autowired
     private CategoryService categoryService;
+
+    private String errorMessage;
 
     @RequestMapping(value = "/foodList", method = RequestMethod.GET)
     public String foodList(Model model){
@@ -51,8 +51,13 @@ public class FoodController {
             model.addAttribute("category", list);
             model.addAttribute("errorMessage", errorMessage);
             return "addFood";
+        }else if(food.getCategory()==null){
+            errorMessage = "Please choose category";
+            List<Category> list = categoryService.getCategories();
+            model.addAttribute("category", list);
+            model.addAttribute("errorMessage", errorMessage);
+            return "addFood";
         }else{
-
             foodService.addNewDishes(food);
             return "redirect:/";
         }
