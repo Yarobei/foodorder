@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Menu By Category</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Ingredients</th>
+        <th>Cooking Time</th>
+        <th>Weight</th>
+        <th>Discount</th>
+        <th>Delivery</th>
+    </tr>
+    <tr th:each ="food : ${menuByCategory}">
+        <td th:utext="${food.name}">...</td>
+        <td th:utext="${food.category.categoryName}">...</td>
+        <td th:utext="${food.price}">...</td>
+        <td th:utext="${food.ingredients}">...</td>
+        <td th:utext="${food.cookingTime}">...</td>
+        <td th:utext="${food.weight}">...</td>
+        <td th:utext="${food.discount}">...</td>
+        <td th:utext="${food.delivery}">...</td>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <td>
+                <form th:action="@{/deleteFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
+                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                </form>
+            </td>
+        </div>
+    </tr>
+</table>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
