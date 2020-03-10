@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>Person List</title>
+    <title>User List</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -15,17 +15,18 @@
         <tr>
             <th>First Name</th>
             <th>Password</th>
-            <th>Role</th>
+            <th>Delete</th>
         </tr>
         <tr th:each ="user : ${users}">
             <td th:utext="${user.username}">...</td>
             <td th:utext="${user.password}">...</td>
-            <td th:utext="${user.roles}">...</td>
-            <td>
-                <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
-                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
-                </form>
-            </td>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <td>
+                    <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
+                        <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                    </form>
+                </td>
+            </div>
         </tr>
     </table>
 </div>

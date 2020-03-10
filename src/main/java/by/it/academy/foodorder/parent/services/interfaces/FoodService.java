@@ -22,4 +22,5 @@ public interface FoodService {
 
     Optional<Food> getAllByCategory(Category category);
 
+    List<Food> gettAllByCategoryName(String name);
 }

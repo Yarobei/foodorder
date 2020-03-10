@@ -5,3 +5,8 @@ INSERT INTO category (category_id, category_name) VALUES
 (4, 'Salads'),
 (5, 'Soups'),
 (6, 'Deserts');
+
+
+INSERT INTO role (role_id, role_name) VALUES
+(1, 'ADMIN'),
+(2, 'USER');

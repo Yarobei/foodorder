@@ -65,4 +65,9 @@ public class FoodServiceImpl implements FoodService {
     public Optional<Food> getAllByCategory(Category category) {
         return foodRepository.findAllByCategory(category);
     }
+
+    @Override
+    public List<Food> gettAllByCategoryName(String name) {
+        return foodRepository.getAllByCategoryCategoryName(name);
+    }
 }

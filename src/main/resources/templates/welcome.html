@@ -14,17 +14,21 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         </form>
 
-        <h2><a th:href onclick="document.forms['logoutForm'].submit()">Logout</a></h2>
+        <div>
+            <h2> Hello, <div sec:authentication="name"></div> | <a th:href onclick="document.forms['logoutForm'].submit()">Click to Logout</a></h2>
+        </div>
 
         <a th:href="@{/registration}">Sign Up</a>
         <br/>
         <a th:href="@{/userList}">User List</a>
         <br/>
-        <a th:href="@{/addFood}">Add Food</a>
-        <br/>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a th:href="@{/addFood}">Add Food</a>
+        </div>
         <a th:href="@{/foodList}">Food List</a>
         <br/>
-
+        <a th:href="@{/menu}">Menu</a>
+        <br/>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

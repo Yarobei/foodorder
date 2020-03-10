@@ -27,6 +27,7 @@ public class User {
 
     @Column
     @ManyToMany
+    @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<Role> roles;
 
     @Column

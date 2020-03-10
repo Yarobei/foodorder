@@ -9,7 +9,7 @@ import java.util.Optional;
 @Service
 public interface CategoryService {
 
-    List<Category> getCategories();
+    List<Category> getAllCategories();
 
     Category getCategoryById(Long id);
 

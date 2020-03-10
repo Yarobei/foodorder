@@ -23,5 +23,6 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
+    @EqualsAndHashCode.Exclude @ToString.Exclude
     private Set<User> users;
 }

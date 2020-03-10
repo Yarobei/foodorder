@@ -15,4 +15,6 @@ public interface FoodRepository extends CrudRepository<Food, Long> {
 
     Optional<Food> findAllByCategory(Category category);
 
+    List<Food> getAllByCategoryCategoryName(String name);
+
 }

@@ -49,6 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception{
         authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+
+        authenticationManagerBuilder
+                .inMemoryAuthentication()
+                .withUser("user").password(bCryptPasswordEncoder().encode("user")).roles("USER")
+                .and()
+                .withUser("admin").password(bCryptPasswordEncoder().encode("admin")).roles("ADMIN");
     }
 
 }

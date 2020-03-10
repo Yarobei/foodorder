@@ -5,6 +5,7 @@ import by.it.academy.foodorder.parent.model.Food;
 import by.it.academy.foodorder.parent.services.interfaces.CategoryService;
 import by.it.academy.foodorder.parent.services.interfaces.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -35,7 +36,7 @@ public class FoodController {
     @RequestMapping(value = "/addFood", method = RequestMethod.GET)
     public String createFood(Model model){
         model.addAttribute("food", new Food());
-        List<Category> list = categoryService.getCategories();
+        List<Category> list = categoryService.getAllCategories();
         model.addAttribute("category", list);
         return "addFood";
     }
@@ -47,13 +48,13 @@ public class FoodController {
                 food.getIngredients() == null || food.getIngredients().length() == 0 ||
                 food.getWeight()==null || food.getDiscount()==null  ){
             errorMessage = "Incorrect input fields";
-            List<Category> list = categoryService.getCategories();
+            List<Category> list = categoryService.getAllCategories();
             model.addAttribute("category", list);
             model.addAttribute("errorMessage", errorMessage);
             return "addFood";
         }else if(food.getCategory()==null){
             errorMessage = "Please choose category";
-            List<Category> list = categoryService.getCategories();
+            List<Category> list = categoryService.getAllCategories();
             model.addAttribute("category", list);
             model.addAttribute("errorMessage", errorMessage);
             return "addFood";
