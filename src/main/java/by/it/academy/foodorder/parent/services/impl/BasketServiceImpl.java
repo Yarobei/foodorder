@@ -18,19 +18,18 @@ public class BasketServiceImpl implements BasketService {
     @Autowired
     private BasketRepository basketRepository;
 
-
     @Override
-    public List<Basket> getBasket() {
-        return (List<Basket>) basketRepository.findAll();
+    public Basket getBasketByUsername(String name) {
+        return basketRepository.findBasketByUserUsername(name);
     }
 
     @Override
-    public Optional<Basket> getBasketByUserId(Long id) {
+    public Basket getBasketByUserId(Long id) {
         return basketRepository.findBasketByUserUserId(id);
     }
 
     @Override
-    public Optional<Basket> getBasketByUser(User user) {
+    public Basket getBasketByUser(User user) {
         return basketRepository.findBasketByUser(user);
     }
 }

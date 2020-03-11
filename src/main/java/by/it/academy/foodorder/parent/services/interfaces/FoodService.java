@@ -18,9 +18,9 @@ public interface FoodService {
 
     Food updateDish(Food food);
 
-    List<Food> getByFoodId(Long id);
+    Food getByFoodId(Long id);
 
     Optional<Food> getAllByCategory(Category category);
 
-    List<Food> gettAllByCategoryName(String name);
+    List<Food> getAllByCategoryName(String name);
 }

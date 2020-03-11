@@ -31,7 +31,7 @@ public class MenuController {
 
     @RequestMapping(value = "/menu/{categoryName}")
     public String getMenuByName(Model model, @PathVariable String categoryName){
-        List<Food> foodList = foodService.gettAllByCategoryName(categoryName);
+        List<Food> foodList = foodService.getAllByCategoryName(categoryName);
         model.addAttribute("menuByCategory", foodList);
         return "menuList";
     }

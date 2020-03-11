@@ -65,7 +65,7 @@ public class FoodController {
     }
 
     @RequestMapping(value = "/deleteFood/{id}")
-    public String deleteUFood(@PathVariable String id){
+    public String deleteFood(@PathVariable String id){
         foodService.removeDish(Long.valueOf(id));
         return "redirect:/foodList";
     }

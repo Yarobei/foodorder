@@ -11,7 +11,9 @@ import java.util.Optional;
 @Repository
 public interface BasketRepository extends CrudRepository<Basket, Long> {
 
-    Optional<Basket> findBasketByUserUserId(Long id);
+    Basket findBasketByUserUserId(Long id);
 
-    Optional<Basket> findBasketByUser(User user);
+    Basket findBasketByUserUsername(String userName);
+
+    Basket findBasketByUser(User user);
 }

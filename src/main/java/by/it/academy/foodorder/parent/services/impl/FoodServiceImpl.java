@@ -57,7 +57,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> getByFoodId(Long id) {
+    public Food getByFoodId(Long id) {
         return foodRepository.findByFoodId(id);
     }
 
@@ -67,7 +67,7 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> gettAllByCategoryName(String name) {
+    public List<Food> getAllByCategoryName(String name) {
         return foodRepository.getAllByCategoryCategoryName(name);
     }
 }

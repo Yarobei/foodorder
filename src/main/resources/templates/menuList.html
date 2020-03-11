@@ -28,6 +28,11 @@
         <td th:utext="${food.weight}">...</td>
         <td th:utext="${food.discount}">...</td>
         <td th:utext="${food.delivery}">...</td>
+        <td>
+            <form th:action="@{/buyFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
+                <button type="submit">Add to Order</button>
+            </form>
+        </td>
         <div sec:authorize="hasRole('ROLE_ADMIN')">
             <td>
                 <form th:action="@{/deleteFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
