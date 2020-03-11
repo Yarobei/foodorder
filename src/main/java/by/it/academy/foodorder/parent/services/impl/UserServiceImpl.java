@@ -1,6 +1,6 @@
 package by.it.academy.foodorder.parent.services.impl;
 
-import by.it.academy.foodorder.parent.model.Role;
+import by.it.academy.foodorder.parent.model.Basket;
 import by.it.academy.foodorder.parent.model.User;
 import by.it.academy.foodorder.parent.repository.RoleRepository;
 import by.it.academy.foodorder.parent.repository.UserRepository;
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(new HashSet<>(roleRepository.findByName("user")));
-//        user.setRoles(new HashSet<>(roleRepository.findAll()));
+        user.setBasket(new Basket());
         userRepository.save(user);
     }
 
