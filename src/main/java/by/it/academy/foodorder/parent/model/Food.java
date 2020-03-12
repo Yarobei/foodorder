@@ -49,5 +49,5 @@ public class Food {
             joinColumns = {@JoinColumn(name = "food_id")},
             inverseJoinColumns = {@JoinColumn(name = "basket_id")})
     @EqualsAndHashCode.Exclude @ToString.Exclude
-    private List<Basket> basket = new ArrayList<>();
+    private List<Basket> basket;
 }

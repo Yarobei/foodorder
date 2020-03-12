@@ -26,7 +26,7 @@ class ParentApplicationTests {
     @Test
     void contextLoads() {
 
-        Category category = new Category(3L);
+       /* Category category = new Category(3L);
 
         Food food = new Food(null, "Pizza", 13.0, 13,
                 true, "qweryty", 13.0,
@@ -35,7 +35,7 @@ class ParentApplicationTests {
         food.setCategory(categoryService.getCategoryById(food.getCategory().getCategoryId()));
 
         foodService.addNewDishes(food);
-        System.err.println(foodRepository.findAll());
+        System.err.println(foodRepository.findAll());*/
     }
 
 }

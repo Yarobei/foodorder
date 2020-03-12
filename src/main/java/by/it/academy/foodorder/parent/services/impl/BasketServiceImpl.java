@@ -7,6 +7,7 @@ import by.it.academy.foodorder.parent.services.interfaces.BasketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,17 +20,27 @@ public class BasketServiceImpl implements BasketService {
     private BasketRepository basketRepository;
 
     @Override
+    @Transactional
     public Basket getBasketByUsername(String name) {
         return basketRepository.findBasketByUserUsername(name);
     }
 
     @Override
+    @Transactional
     public Basket getBasketByUserId(Long id) {
         return basketRepository.findBasketByUserUserId(id);
     }
 
     @Override
+    @Transactional
     public Basket getBasketByUser(User user) {
         return basketRepository.findBasketByUser(user);
+    }
+
+    @Override
+    @Transactional
+    public void saveBasket(Basket basket) {
+        log.info("Save basket : {}", basket +". With food : " + basket.getFood());
+        basketRepository.save(basket);
     }
 }

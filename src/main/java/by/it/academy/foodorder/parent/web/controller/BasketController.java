@@ -2,9 +2,7 @@ package by.it.academy.foodorder.parent.web.controller;
 
 import by.it.academy.foodorder.parent.model.Basket;
 import by.it.academy.foodorder.parent.model.Food;
-import by.it.academy.foodorder.parent.model.User;
 import by.it.academy.foodorder.parent.repository.BasketRepository;
-import by.it.academy.foodorder.parent.services.impl.SecurityServiceImpl;
 import by.it.academy.foodorder.parent.services.interfaces.BasketService;
 import by.it.academy.foodorder.parent.services.interfaces.FoodService;
 import by.it.academy.foodorder.parent.services.interfaces.UserService;
@@ -31,17 +29,24 @@ public class BasketController {
     @RequestMapping(value = "/buyFood/{id}")
     public String buyFood(@PathVariable String id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        basketService.getBasketByUsername(name).getFood().add(foodService.getByFoodId(Long.valueOf(id)));
+        if(auth.getName()!=null){
+            String name = auth.getName();
+            Basket basket = basketService.getBasketByUsername(name);
+            basket.getFood().add(foodService.getByFoodId(Long.valueOf(id)));
+            basketService.saveBasket(basket);
+        }
         return "redirect:/menu";
     }
 
     @RequestMapping(value = "/myBasket", method = RequestMethod.GET)
     public String getBasket(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-        List<Food> basket = basketService.getBasketByUsername(name).getFood();
-        model.addAttribute("basket", basket);
+        if(auth.getName()!=null) {
+            String name = auth.getName();
+            Basket basket = basketService.getBasketByUsername(name);
+            List<Food> foodList = basket.getFood();
+            model.addAttribute("basket", foodList);
+        }
         return "myBasket";
     }
 

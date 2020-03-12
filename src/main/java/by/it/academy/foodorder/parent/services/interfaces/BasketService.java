@@ -14,4 +14,6 @@ public interface BasketService {
 
     Basket getBasketByUser(User user);
 
+    void saveBasket(Basket basket);
+
 }
