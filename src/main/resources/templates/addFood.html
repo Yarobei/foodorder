@@ -36,7 +36,6 @@
                     <div th:if="${category == null or #lists.isEmpty(category)}">
                         <div>"No Category were found, please create some first"</div>
                     </div>
-                    <p th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
                 </div>
             </div>
 
@@ -44,14 +43,14 @@
                 <div class="form-group col-md-6">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" placeholder="name" th:field="*{name}">
-                    <p th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red; font-style:italic;">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="price">Price</label>
                     <input type="text" class="form-control" id="price" placeholder="price" th:field="*{price}">
-                    <p th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+                    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color: red; font-style:italic;">
                 </div>
             </div>
             <div class="form-row">
@@ -59,7 +58,7 @@
                     <label for="cookingTime">Cooking Time</label>
                     <input type="text" class="form-control" id="cookingTime" placeholder="cookingTime"
                            th:field="*{cookingTime}">
-                    <p th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+                    <p th:if="${#fields.hasErrors('cookingTime')}" th:errors="*{cookingTime}" style="color: red; font-style:italic;">
                 </div>
             </div>
             <div class="form-row">
@@ -67,21 +66,21 @@
                     <label for="ingredients">Ingredients</label>
                     <input type="text" class="form-control" id="ingredients" placeholder="ingredients"
                            th:field="*{ingredients}">
-                    <p th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+                    <p th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}" style="color: red; font-style:italic;">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="weight">Weight</label>
                     <input type="text" class="form-control" id="weight" placeholder="weight" th:field="*{weight}">
-                    <p th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+                    <p th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color: red; font-style:italic;">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="discount">Discount</label>
                     <input type="text" class="form-control" id="discount" placeholder="discount" th:field="*{discount}">
-                    <p th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+                    <p th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" style="color: red; font-style:italic;">
                 </div>
             </div>
 

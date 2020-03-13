@@ -3,6 +3,7 @@ package by.it.academy.foodorder.parent.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +33,10 @@ public class User {
 
     @Column
     private String password;
+
+    @Pattern(regexp = "(^\\+{1}375)([0-9]{2})([0-9]{3})([0-9]{2})([0-9]{2}$)",
+            message =  "Invalid phone number")
+    private String phoneNumber;
 
     @Transient
     @Column(name = "password_confirm")

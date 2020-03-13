@@ -15,11 +15,15 @@
         <tr>
             <th>First Name</th>
             <th>Password</th>
-            <th>Delete</th>
+            <th>Phone</th>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <th>Delete</th>
+            </div>
         </tr>
         <tr th:each ="user : ${users}">
             <td th:utext="${user.username}">...</td>
             <td th:utext="${user.password}">...</td>
+            <td th:utext="${user.phoneNumber}">...</td>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <td>
                     <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">

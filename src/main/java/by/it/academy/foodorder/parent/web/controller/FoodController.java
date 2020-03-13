@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -23,8 +25,6 @@ public class FoodController {
 
     @Autowired
     private CategoryService categoryService;
-
-    private String errorMessage;
 
     @RequestMapping(value = "/foodList", method = RequestMethod.GET)
     public String foodList(Model model){
@@ -42,23 +42,12 @@ public class FoodController {
     }
 
     @RequestMapping(value = "/addFood", method = RequestMethod.POST)
-    public String addFood(Model model, @ModelAttribute Food food){
-        if(food.getName() == null || food.getName().length() == 0 ||
-                food.getPrice() == null || food.getPrice() == 0 || food.getCookingTime() == null ||
-                food.getIngredients() == null || food.getIngredients().length() == 0 ||
-                food.getWeight()==null || food.getDiscount()==null  ){
-            errorMessage = "Incorrect input fields";
+    public String addFood(Model model, @ModelAttribute @Valid Food food, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
             List<Category> list = categoryService.getAllCategories();
             model.addAttribute("category", list);
-            model.addAttribute("errorMessage", errorMessage);
             return "addFood";
-        }else if(food.getCategory()==null){
-            errorMessage = "Please choose category";
-            List<Category> list = categoryService.getAllCategories();
-            model.addAttribute("category", list);
-            model.addAttribute("errorMessage", errorMessage);
-            return "addFood";
-        }else{
+        } else{
             foodService.addNewDishes(food);
             return "redirect:/welcome";
         }
@@ -70,3 +59,17 @@ public class FoodController {
         return "redirect:/foodList";
     }
 }
+
+/*    @RequestMapping(value = { "/foodImage" }, method = RequestMethod.GET)
+    public void productImage(HttpServletRequest request, HttpServletResponse response, Model model,
+                             @RequestParam("id") String id) throws IOException {
+        Food food = null;
+        if (id != null) {
+            food = foodService.getByFoodId(Long.valueOf(id));
+        }
+        if (food != null && food.getImage() != null) {
+            response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+            response.getOutputStream().write(food.getImage());
+        }
+        response.getOutputStream().close();
+    }*/

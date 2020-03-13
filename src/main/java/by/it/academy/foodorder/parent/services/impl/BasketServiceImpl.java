@@ -40,7 +40,6 @@ public class BasketServiceImpl implements BasketService {
     @Override
     @Transactional
     public void saveBasket(Basket basket) {
-        log.info("Save basket : {}", basket +". With food : " + basket.getFood());
         basketRepository.save(basket);
     }
 }

@@ -32,10 +32,12 @@ public class BasketController {
         if(auth.getName()!=null){
             String name = auth.getName();
             Basket basket = basketService.getBasketByUsername(name);
-            basket.getFood().add(foodService.getByFoodId(Long.valueOf(id)));
+            Food food = foodService.getByFoodId(Long.valueOf(id));
+            food.getBasket().add(basket);
+            basket.getFood().add(food);
             basketService.saveBasket(basket);
         }
-        return "redirect:/menu";
+        return "redirect:/myBasket";
     }
 
     @RequestMapping(value = "/myBasket", method = RequestMethod.GET)
@@ -54,7 +56,13 @@ public class BasketController {
     public String removeFood(@PathVariable String id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-        basketService.getBasketByUsername(name).getFood().remove(foodService.getByFoodId(Long.valueOf(id)));
+        if(auth.getName()!=null){
+            Basket basket = basketService.getBasketByUsername(name);
+            Food food = foodService.getByFoodId(Long.valueOf(id));
+            food.getBasket().remove(basket);
+            basket.getFood().remove(food);
+            basketService.saveBasket(basket);
+        }
         return "redirect:/myBasket";
     }
 
