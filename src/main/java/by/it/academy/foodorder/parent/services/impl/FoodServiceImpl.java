@@ -2,16 +2,15 @@ package by.it.academy.foodorder.parent.services.impl;
 
 import by.it.academy.foodorder.parent.model.Category;
 import by.it.academy.foodorder.parent.model.Food;
-import by.it.academy.foodorder.parent.repository.CategoryRepository;
 import by.it.academy.foodorder.parent.repository.FoodRepository;
 import by.it.academy.foodorder.parent.services.interfaces.CategoryService;
 import by.it.academy.foodorder.parent.services.interfaces.FoodService;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +36,16 @@ public class FoodServiceImpl implements FoodService {
     public Food addNewDishes(Food food) {
         log.info("Add new food: {}", food);
         food.setCategory(categoryService.getCategoryById(food.getCategory().getCategoryId()));
+        if (food.getFileData() != null) {
+            byte[] image = null;
+            try {
+                image = food.getFileData().getBytes();
+            } catch (IOException e) {
+            }
+            if (image != null && image.length > 0) {
+                food.setImage(image);
+            }
+        }
         return foodRepository.save(food);
     }
 
@@ -78,4 +87,11 @@ public class FoodServiceImpl implements FoodService {
     public List<Food> getAllByCategoryName(String name) {
         return foodRepository.getAllByCategoryCategoryName(name);
     }
+
+    @Override
+    public void save(Food food) {
+        foodRepository.save(food);
+    }
+
+
 }

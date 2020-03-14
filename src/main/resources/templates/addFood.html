@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<form th:action="@{/addFood}" th:object="${food}" method="post">
+<form th:action="@{/addFood}" th:object="${food}" method="post", enctype="multipart/form-data">
     <form>
         <div class="container">
 
@@ -39,6 +39,14 @@
                 </div>
             </div>
 
+            <div>
+                <label><b>Image</b></label>
+                <br/>
+                <img th:src="@{/productImage/{id}(id=${food.foodId})}"/>
+                <input type="file" th:field="*{fileData}"/>
+            </div>
+            <br/>
+
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="name">Name</label>
@@ -46,6 +54,7 @@
                     <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red; font-style:italic;">
                 </div>
             </div>
+
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label for="price">Price</label>

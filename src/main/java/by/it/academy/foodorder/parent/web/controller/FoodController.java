@@ -4,8 +4,8 @@ import by.it.academy.foodorder.parent.model.Category;
 import by.it.academy.foodorder.parent.model.Food;
 import by.it.academy.foodorder.parent.services.interfaces.CategoryService;
 import by.it.academy.foodorder.parent.services.interfaces.FoodService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class FoodController {
 
     @Autowired
@@ -58,11 +59,10 @@ public class FoodController {
         foodService.removeDish(Long.valueOf(id));
         return "redirect:/foodList";
     }
-}
 
-/*    @RequestMapping(value = { "/foodImage" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/productImage/{id}" }, method = RequestMethod.GET)
     public void productImage(HttpServletRequest request, HttpServletResponse response, Model model,
-                             @RequestParam("id") String id) throws IOException {
+                             @PathVariable String id) throws IOException {
         Food food = null;
         if (id != null) {
             food = foodService.getByFoodId(Long.valueOf(id));
@@ -72,4 +72,5 @@ public class FoodController {
             response.getOutputStream().write(food.getImage());
         }
         response.getOutputStream().close();
-    }*/
+    }
+}

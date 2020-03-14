@@ -17,14 +17,15 @@ create table food
 (
     food_id      bigint auto_increment
         primary key,
-    cooking_time int          null,
-    delivery     bit          null,
+    cooking_time int          not null,
+    delivery     bit          not null,
     discount     double       null,
-    ingredients  varchar(255) null,
-    name         varchar(255) null,
-    price        double       null,
-    weight       double       null,
-    category_id  bigint       null
+    image        longblob     null,
+    ingredients  varchar(255) not null,
+    name         varchar(50)  not null,
+    price        double       not null,
+    weight       double       not null,
+    category_id  bigint       not null
 )
     engine = MyISAM;
 

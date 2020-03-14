@@ -1,12 +1,11 @@
 package by.it.academy.foodorder.parent.model;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,13 +21,17 @@ public class Food {
     @Column(name = "food_id")
     private Long foodId;
 
-    /*@Lob
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
     @Column(name = "image", length = Integer.MAX_VALUE, nullable = true)
-    private byte[] image;*/
+    private byte[] image;
+
+    @Transient
+    private MultipartFile fileData;
 
     @Column
     @NotNull
-    @Size(min = 5, max = 50, message = "Incorrect food name")
+    @Size(min = 4, max = 50, message = "Incorrect food name")
     private String name;
 
     @Column

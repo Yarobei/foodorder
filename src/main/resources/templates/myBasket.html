@@ -10,6 +10,7 @@
 <body>
 <table border="1">
     <tr>
+        <th>Image</th>
         <th>Name</th>
         <th>Category</th>
         <th>Price</th>
@@ -20,6 +21,7 @@
         <th>Delivery</th>
     </tr>
     <tr th:each ="food : ${basket}">
+        <td><img th:src="@{/productImage/{id}(id=${food.foodId})}" th:width="120px" th:height="80px"/></td>
         <td th:utext="${food.name}">...</td>
         <td th:utext="${food.category.categoryName}">...</td>
         <td th:utext="${food.price}">...</td>

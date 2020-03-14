@@ -13,7 +13,7 @@
 <div>
     <table border="1">
         <tr>
-            <th>First Name</th>
+            <th>Name</th>
             <th>Password</th>
             <th>Phone</th>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
@@ -23,7 +23,7 @@
         <tr th:each ="user : ${users}">
             <td th:utext="${user.username}">...</td>
             <td th:utext="${user.password}">...</td>
-            <td th:utext="${user.phoneNumber}">...</td>
+            <td th:utext="${user.phoneNumber}">...</td>yt
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <td>
                     <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
