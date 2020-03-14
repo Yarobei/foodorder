@@ -3,7 +3,6 @@ package by.it.academy.foodorder.parent.web.controller;
 import by.it.academy.foodorder.parent.model.User;
 import by.it.academy.foodorder.parent.services.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-public class UtilUserController {
+public class UserController {
 
     @Autowired
     private UserService userService;

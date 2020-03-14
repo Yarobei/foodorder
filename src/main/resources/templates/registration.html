@@ -28,6 +28,7 @@
         <div class="form-group">
             <label for="phoneNumber">Phone Number</label>
             <input type="text" class="form-control" id="phoneNumber" placeholder="Phone" th:field="*{phoneNumber}"/>
+            <small id="phoneHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
             <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" style="color: red; font-style:italic;">
         </div>
 
