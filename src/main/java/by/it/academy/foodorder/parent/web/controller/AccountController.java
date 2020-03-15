@@ -41,11 +41,14 @@ public class AccountController {
 
     @RequestMapping(value = "/changePhone/{id}", method = RequestMethod.GET)
     public String getPhone(@PathVariable String id, Model model){
+
         User user = userService.getUserById(Long.valueOf(id));
+
         if(user!=null){
             model.addAttribute("user", user);
             return "changePhone";
         }
+
         return "myAccount";
     }
 
@@ -56,8 +59,6 @@ public class AccountController {
             return "changePhone";
         }
 
-        Long id = userService.getIdByUsername(user.getUsername());
-        user.setUserId(id);
         userService.saveUser(user);
         return "redirect:/myAccount";
     }
@@ -66,30 +67,28 @@ public class AccountController {
     public String getPassword(@PathVariable String id, Model model){
 
         User user = userService.getUserById(Long.valueOf(id));
+
         if(user!=null){
             model.addAttribute("user", user);
             return "changePassword";
         }
+
         return "myAccount";
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public String changePassword(@ModelAttribute @Valid User user, BindingResult bindingResult){
+
         passwordValidator.validate(user, bindingResult);
 
         if(bindingResult.hasErrors()){
             return "changePassword";
         }
 
-        Long id = userService.getIdByUsername(user.getUsername());
-        user.setUserId(id);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 
         userService.saveUser(user);
         return "redirect:/myAccount";
-
-
     }
-
 
 }
