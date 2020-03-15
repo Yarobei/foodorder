@@ -27,7 +27,7 @@ public class UserController {
     @RequestMapping(value = "/deleteUser/{id}")
     public String deleteUser(@PathVariable String id){
         userService.deleteUserById(Long.valueOf(id));
-        return "redirect:/";
+        return "redirect:/login";
     }
 
 

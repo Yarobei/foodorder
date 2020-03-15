@@ -2,37 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>User List</title>
+    <title>My Account</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<h1>User List</h1>
+<h1>My Info</h1>
 <br/><br/>
 <div>
     <table border="1">
         <tr>
             <th>Name</th>
-            <th>Password</th>
             <th>Phone</th>
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <th>Delete</th>
-            </div>
+            <th>Delete</th>
+            <th>Update Info</th>
+            <th>Change Password</th>
         </tr>
-        <tr th:each ="user : ${users}">
+        <tr th:each ="user : ${user}">
             <td th:utext="${user.username}">...</td>
-            <td th:utext="${user.password}">...</td>
             <td th:utext="${user.phoneNumber}">...</td>
-            <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <td>
-                    <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
-                        <button type="submit" onClick="return confirm('sure?')">Delete</button>
-                    </form>
-                </td>
-            </div>
+            <td>
+                <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
+                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/changePhone/{id}(id=${user.userId})}" th:object="${user}">
+                    <button type="submit">Change Phone Number</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/changePassword/{id}(id=${user.userId})}" th:object="${user}">
+                    <button type="submit">Change Password</button>
+                </form>
+            </td>
         </tr>
     </table>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

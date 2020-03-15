@@ -55,8 +55,8 @@ public class BasketController {
     @RequestMapping(value = "/removeFood/{id}")
     public String removeFood(@PathVariable String id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
         if(auth.getName()!=null){
+            String name = auth.getName();
             Basket basket = basketService.getBasketByUsername(name);
             Food food = foodService.getByFoodId(Long.valueOf(id));
             food.getBasket().remove(basket);

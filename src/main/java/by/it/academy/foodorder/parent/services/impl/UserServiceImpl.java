@@ -2,7 +2,6 @@ package by.it.academy.foodorder.parent.services.impl;
 
 import by.it.academy.foodorder.parent.model.Basket;
 import by.it.academy.foodorder.parent.model.User;
-import by.it.academy.foodorder.parent.repository.BasketRepository;
 import by.it.academy.foodorder.parent.repository.RoleRepository;
 import by.it.academy.foodorder.parent.repository.UserRepository;
 import by.it.academy.foodorder.parent.services.interfaces.UserService;
@@ -12,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -33,13 +31,17 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findByName("user")));
-        Basket basket = new Basket();
-        userRepository.save(user);
-        basket.setBasketId(user.getUserId());
-        user.setBasket(basket);
-        userRepository.save(user);
+        if(user.getUserId()==null){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setRoles(new HashSet<>(roleRepository.findByName("user")));
+            Basket basket = new Basket();
+            userRepository.save(user);
+            basket.setBasketId(user.getUserId());
+            user.setBasket(basket);
+            userRepository.save(user);
+        }else{
+            userRepository.save(user);
+        }
     }
 
     @Override
@@ -100,6 +102,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public boolean existsByUsername(String name) {
         return !userRepository.existsByUsername(name);
+    }
+
+    @Override
+    public Long getIdByUsername(String name) {
+        return userRepository.findByUsername(name).getUserId();
     }
 
 

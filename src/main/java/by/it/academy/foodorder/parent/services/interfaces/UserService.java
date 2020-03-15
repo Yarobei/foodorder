@@ -27,4 +27,5 @@ public interface UserService {
 
     boolean existsByUsername(String name);
 
+    Long getIdByUsername(String name);
 }

@@ -1,6 +1,7 @@
 package by.it.academy.foodorder.parent.model;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -12,6 +13,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @Builder
 @Entity
+@DynamicUpdate
 public class User {
 
     @Id
