@@ -36,16 +36,7 @@ public class FoodServiceImpl implements FoodService {
     public Food addNewDishes(Food food) {
         log.info("Add new food: {}", food);
         food.setCategory(categoryService.getCategoryById(food.getCategory().getCategoryId()));
-        if (food.getFileData() != null) {
-            byte[] image = null;
-            try {
-                image = food.getFileData().getBytes();
-            } catch (IOException e) {
-            }
-            if (image != null && image.length > 0) {
-                food.setImage(image);
-            }
-        }
+        saveImage(food);
         return foodRepository.save(food);
     }
 
@@ -54,20 +45,6 @@ public class FoodServiceImpl implements FoodService {
     public void removeDish(Long id) {
         log.info("Delete food with id: {}", id);
         foodRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional
-    public Food updateDish(Food food) {
-        if (foodRepository.existsById(food.getFoodId())){
-            log.info("Update food: {}", food);
-            foodRepository.delete(food);
-            foodRepository.save(food);
-            return food;
-        }else{
-            log.info("Update food: {}", food);
-            return foodRepository.save(food);
-        }
     }
 
     @Override
@@ -90,8 +67,21 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public void save(Food food) {
+        saveImage(food);
         foodRepository.save(food);
     }
 
 
+    public void saveImage(Food food){
+        if (food.getFileData() != null) {
+            byte[] image = null;
+            try {
+                image = food.getFileData().getBytes();
+            } catch (IOException e) {
+            }
+            if (image != null && image.length > 0) {
+                food.setImage(image);
+            }
+        }
+    }
 }

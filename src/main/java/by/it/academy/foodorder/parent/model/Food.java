@@ -1,6 +1,7 @@
 package by.it.academy.foodorder.parent.model;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @EqualsAndHashCode
 @Builder
 @Entity
+@DynamicUpdate
 public class Food {
 
     @Id

@@ -37,8 +37,15 @@
             <td th:utext="${food.delivery}">...</td>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <td>
-                    <form th:action="@{/deleteFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
+                    <form th:action="@{/deleteFood/{id}(id=${food.foodId})}" th:object="${food}">
                         <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                    </form>
+                </td>
+            </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <td>
+                    <form th:action="@{/updateFood/{id}(id=${food.foodId})}" th:object="${food}">
+                        <button type="submit">Update</button>
                     </form>
                 </td>
             </div>

@@ -73,4 +73,23 @@ public class FoodController {
         }
         response.getOutputStream().close();
     }
+
+    @RequestMapping(value = "/updateFood/{id}", method = RequestMethod.GET)
+    public String getUpdateFood(Model model, @PathVariable String id){
+        model.addAttribute("food", foodService.getByFoodId(Long.valueOf(id)));
+        List<Category> list = categoryService.getAllCategories();
+        model.addAttribute("category", list);
+        return "updateFood";
+    }
+
+    @RequestMapping(value = "/updateFood", method = RequestMethod.POST)
+    public String postUpdateFood(@ModelAttribute @Valid Food food, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            return "updateFood";
+        }
+
+        foodService.save(food);
+        return "redirect:/menu";
+    }
 }

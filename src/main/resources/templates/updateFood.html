@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Add Food!</title>
+
+    <style type="text/css">
+        .container {
+            float: left
+        }
+    </style>
+
+</head>
+<body>
+<form th:action="@{/updateFood}" th:object="${food}" method="post" enctype="multipart/form-data">
+    <form>
+        <div class="container">
+
+            <div class="form-row">
+                    <input type="hidden" class="form-control" id="id" placeholder="name" th:field="*{foodId}">
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">Category</label>
+                <div class="col-md-5">
+                    <div th:if="${category != null and not #lists.isEmpty(category)}">
+                        <select class="custom-select custom-select-lg mb-3" th:field="*{category}">
+                            <option th:each="category : ${category}"
+                                    th:value="${category.categoryId}"
+                                    th:text="${category.categoryName}">
+                            </option>
+                        </select>
+                    </div>
+                    <div th:if="${category == null or #lists.isEmpty(category)}">
+                        <div>"No Category were found, please create some first"</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="ui-icon-image"><b>Image</b></label>
+                <br/>
+                <img th:src="@{/productImage/{id}(id=${food.foodId})}"/>
+                <input type="file" th:field="*{fileData}"/>
+            </div>
+            <br/>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="name" th:field="*{name}">
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red; font-style:italic;">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="price">Price</label>
+                    <input type="text" class="form-control" id="price" placeholder="price" th:field="*{price}">
+                    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color: red; font-style:italic;">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="cookingTime">Cooking Time</label>
+                    <input type="text" class="form-control" id="cookingTime" placeholder="cookingTime"
+                           th:field="*{cookingTime}">
+                    <p th:if="${#fields.hasErrors('cookingTime')}" th:errors="*{cookingTime}" style="color: red; font-style:italic;">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="ingredients">Ingredients</label>
+                    <input type="text" class="form-control" id="ingredients" placeholder="ingredients"
+                           th:field="*{ingredients}">
+                    <p th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}" style="color: red; font-style:italic;">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="weight">Weight</label>
+                    <input type="text" class="form-control" id="weight" placeholder="weight" th:field="*{weight}">
+                    <p th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color: red; font-style:italic;">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="discount">Discount</label>
+                    <input type="text" class="form-control" id="discount" placeholder="discount" th:field="*{discount}">
+                    <p th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" style="color: red; font-style:italic;">
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input position-static" id="delivery" value="true"
+                       th:field="*{delivery}">
+                <label class="form-check-label" for="delivery">Delivery</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" onClick="return confirm('sure?')">Update</button>
+        </div>
+    </form>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
+

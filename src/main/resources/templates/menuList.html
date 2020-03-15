@@ -42,6 +42,13 @@
                 </form>
             </td>
         </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <td>
+                <form th:action="@{/updateFood/{id}(id=${food.foodId})}" th:object="${food}">
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </div>
     </tr>
 </table>
 

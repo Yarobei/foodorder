@@ -74,20 +74,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(Long id) {
-        User user = userRepository.findByUserId(Long.valueOf(id));
-        if(userRepository.existsById(Long.valueOf(id))){
-            userRepository.delete(user);
-            log.info("Update user: {}", user);
-            userRepository.save(user);
-        }else{
-            log.info("Update user: {}", user);
-            userRepository.save(user);
-        }
-    }
-
-    @Override
-    @Transactional
     public List<User> getAllUsers() {
         return (List<User>) userRepository.findAll();
     }

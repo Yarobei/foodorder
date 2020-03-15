@@ -16,8 +16,6 @@ public interface FoodService {
 
     void removeDish(Long id);
 
-    Food updateDish(Food food);
-
     Food getByFoodId(Long id);
 
     Optional<Food> getAllByCategory(Category category);
