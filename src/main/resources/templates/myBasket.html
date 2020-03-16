@@ -29,7 +29,6 @@
         <td th:utext="${food.cookingTime}">...</td>
         <td th:utext="${food.weight}">...</td>
         <td th:utext="${food.discount}">...</td>
-        <td th:utext="${food.delivery}">...</td>
         <td>
             <form th:action="@{/removeFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
                 <button type="submit">Remove from Order</button>
@@ -37,6 +36,12 @@
         </td>
     </tr>
 </table>
+
+<div th:if="${basket.size()>0}">
+    <form th:action="@{/getOrder}">
+        <button type="submit">Get Order</button>
+    </form>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

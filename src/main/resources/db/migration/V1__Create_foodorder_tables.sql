@@ -18,7 +18,6 @@ create table food
     food_id      bigint auto_increment
         primary key,
     cooking_time int          not null,
-    delivery     bit          not null,
     discount     double       null,
     image        longblob     null,
     ingredients  varchar(255) not null,

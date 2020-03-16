@@ -46,10 +46,6 @@ public class Food {
 
     @Column
     @NotNull
-    private boolean delivery;
-
-    @Column
-    @NotNull
     @Size(min = 5, max = 255, message = "Incorrect food ingredients")
     private String ingredients;
 

@@ -18,7 +18,6 @@
         <th>Cooking Time</th>
         <th>Weight</th>
         <th>Discount</th>
-        <th>Delivery</th>
     </tr>
     <tr th:each ="food : ${menuByCategory}">
         <td><img th:src="@{/productImage/{id}(id=${food.foodId})}" th:width="120px" th:height="80px"/></td>
@@ -29,7 +28,6 @@
         <td th:utext="${food.cookingTime}">...</td>
         <td th:utext="${food.weight}">...</td>
         <td th:utext="${food.discount}">...</td>
-        <td th:utext="${food.delivery}">...</td>
         <td>
             <form th:action="@{/buyFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
                 <button type="submit">Add to Order</button>

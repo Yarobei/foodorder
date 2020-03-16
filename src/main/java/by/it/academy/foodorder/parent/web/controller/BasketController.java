@@ -29,15 +29,15 @@ public class BasketController {
     @RequestMapping(value = "/buyFood/{id}")
     public String buyFood(@PathVariable String id){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Food food = foodService.getByFoodId(Long.valueOf(id));
         if(auth.getName()!=null){
             String name = auth.getName();
             Basket basket = basketService.getBasketByUsername(name);
-            Food food = foodService.getByFoodId(Long.valueOf(id));
             food.getBasket().add(basket);
             basket.getFood().add(food);
             basketService.saveBasket(basket);
         }
-        return "redirect:/myBasket";
+        return "redirect:/menu/"+food.getCategory().getCategoryName();
     }
 
     @RequestMapping(value = "/myBasket", method = RequestMethod.GET)

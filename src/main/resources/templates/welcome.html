@@ -11,7 +11,7 @@
 <div class="container">
     <div th:if="${#request.userPrincipal.name} != null">
         <form id="logoutForm" method="POST" th:action="@{/logout}">
-            <!--            если включить csrf в WebSecureConfig раскомментить
+            <!--          раскомментить если включить csrf в WebSecureConfig
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             -->
         </form>
