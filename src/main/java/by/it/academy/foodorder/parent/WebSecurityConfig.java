@@ -26,9 +26,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity)throws Exception{
-        httpSecurity
-                .authorizeRequests()
+    protected void configure(HttpSecurity http)throws Exception{
+
+        http.csrf().disable();
+
+        http.authorizeRequests().antMatchers("/addFood", "/foodList"
+                , "/foodList", "/foodList", "/updateFood", "/userList")
+                                            .access("hasRole('ROLE_ADMIN')");
+
+        http.authorizeRequests().antMatchers("/changePassword", "/changePhone", "/myAccount"
+                , "/myBasket").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+
+        http.authorizeRequests()
                     .antMatchers("/resources/**", "/registration").permitAll()
                     .anyRequest().authenticated()
                     .and()
@@ -38,6 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .logout()
                     .permitAll();
+
+        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
     }
 

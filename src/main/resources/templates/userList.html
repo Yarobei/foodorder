@@ -19,6 +19,9 @@
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <th>Delete</th>
             </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <th>Change Role</th>
+            </div>
         </tr>
         <tr th:each ="user : ${users}">
             <td th:utext="${user.username}">...</td>
@@ -28,6 +31,13 @@
                 <td>
                     <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
                         <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                    </form>
+                </td>
+            </div>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <td>
+                    <form th:action="@{/changeRole/{id}(id=${user.userId})}">
+                        <button type="submit" onClick="return confirm('sure?')">Make Admin</button>
                     </form>
                 </td>
             </div>

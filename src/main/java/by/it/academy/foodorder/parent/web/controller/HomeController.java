@@ -12,4 +12,9 @@ public class HomeController {
         return "welcome";
     }
 
+    @RequestMapping("/403")
+    public String accessDenied() {
+        return "403";
+    }
+
 }

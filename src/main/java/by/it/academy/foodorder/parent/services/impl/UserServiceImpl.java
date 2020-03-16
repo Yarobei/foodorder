@@ -33,13 +33,16 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         if(user.getUserId()==null){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user.setRoles(new HashSet<>(roleRepository.findByName("user")));
+            user.setRoles(new HashSet<>(roleRepository.findByName("ROLE_USER")));
             Basket basket = new Basket();
             userRepository.save(user);
             basket.setBasketId(user.getUserId());
             user.setBasket(basket);
             userRepository.save(user);
         }else{
+            if(user.getRoles()==null){
+                user.setRoles(new HashSet<>(roleRepository.findByName("ROLE_USER")));
+            }
             userRepository.save(user);
         }
     }

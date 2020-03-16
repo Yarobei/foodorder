@@ -8,5 +8,5 @@ INSERT INTO category (category_id, category_name) VALUES
 
 
 INSERT INTO role (role_id, role_name) VALUES
-(1, 'ADMIN'),
-(2, 'USER');
+(1, 'ROLE_ADMIN'),
+(2, 'ROLE_USER');
