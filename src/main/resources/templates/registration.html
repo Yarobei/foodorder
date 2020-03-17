@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Create an account</title>
+    <title th:utext="#{registration.title}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -15,38 +15,38 @@
 <div class="container">
 
     <form method="POST" th:action="@{/registration}" th:object="${userForm}" class="form-signin">
-        <h2 class="form-signin-heading">Create your account</h2>
+        <h2 class="form-signin-heading" th:utext="#{registration.show}"></h2>
 
 
         <div class="form-group">
-            <label for="name">Name</label>
+            <label for="name" th:utext="#{user.name.field}"></label>
             <input type="text" class="form-control" id="name"
                    placeholder="Username" autofocus="autofocus" th:field="*{username}"/>
             <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red; font-style:italic;">
         </div>
 
         <div class="form-group">
-            <label for="phoneNumber">Phone Number</label>
+            <label for="phoneNumber" th:utext="#{user.phone.field}"></label>
             <input type="text" class="form-control" id="phoneNumber" placeholder="Phone" th:field="*{phoneNumber}"/>
             <small id="phoneHelp" class="form-text text-muted">We'll never share your phone with anyone else.</small>
             <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" style="color: red; font-style:italic;">
         </div>
 
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password" th:utext="#{user.password.field}"></label>
             <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red; font-style:italic;">
         </div>
 
         <div class="form-group">
-            <label for="passwordConfirm">Confirm password</label>
+            <label for="passwordConfirm" th:utext="#{user.confirmPassword.field}"></label>
             <input type="password" id="passwordConfirm" class="form-control"
                    placeholder="Confirm your password" th:field="*{passwordConfirm}"/>
             <p th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"
                style="color: red; font-style:italic;">
         </div>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:utext="#{confirm.button}"></button>
     </form>
 
 </div>

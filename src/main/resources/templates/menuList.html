@@ -3,47 +3,47 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Menu By Category</title>
+    <title th:utext="#{menuList.title}"></title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 <table border="1">
     <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Ingredients</th>
-        <th>Cooking Time</th>
-        <th>Weight</th>
-        <th>Discount</th>
+        <th th:utext="#{food.image.field}"></th>
+        <th th:utext="#{food.name.field}"></th>
+        <th th:utext="#{food.category.field}"></th>
+        <th th:utext="#{food.price.field}"></th>
+        <th th:utext="#{food.ingredients.field}"></th>
+        <th th:utext="#{food.cookingTime.field}"></th>
+        <th th:utext="#{food.weight.field}"></th>
+        <th th:utext="#{food.discount.field}"></th>
     </tr>
     <tr th:each ="food : ${menuByCategory}">
         <td><img th:src="@{/productImage/{id}(id=${food.foodId})}" th:width="120px" th:height="80px"/></td>
         <td th:utext="${food.name}">...</td>
         <td th:utext="${food.category.categoryName}">...</td>
-        <td th:utext="${food.price}">...</td>
+        <td th:utext="${food.price} + ' BYN'">...</td>
         <td th:utext="${food.ingredients}">...</td>
-        <td th:utext="${food.cookingTime}">...</td>
-        <td th:utext="${food.weight}">...</td>
-        <td th:utext="${food.discount}">...</td>
+        <td th:utext="${food.cookingTime} + ' ' +#{minute.info}">...</td>
+        <td th:utext="${food.weight} + ' ' + #{gramm.info}">...</td>
+        <td th:utext="${food.discount} + ' %'">...</td>
         <td>
             <form th:action="@{/buyFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
-                <button type="submit">Add to Order</button>
+                <button type="submit" th:utext="#{menuList.button}"></button>
             </form>
         </td>
         <div sec:authorize="hasRole('ROLE_ADMIN')">
             <td>
                 <form th:action="@{/deleteFood/{id}(id=${food.foodId})}" th:object="${food}" method="post">
-                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                    <button type="submit" onClick="return confirm('sure?')" th:utext="#{delete.button}"></button>
                 </form>
             </td>
         </div>
         <div sec:authorize="hasRole('ROLE_ADMIN')">
             <td>
                 <form th:action="@{/updateFood/{id}(id=${food.foodId})}" th:object="${food}">
-                    <button type="submit">Update</button>
+                    <button type="submit" th:utext="#{update.button}"></button>
                 </form>
             </td>
         </div>

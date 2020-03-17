@@ -2,25 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>User List</title>
+    <title th:utext="#{userList.title}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<h1>User List</h1>
+<h1 th:utext="#{userList.title}"></h1>
 <br/><br/>
 <div>
     <table border="1">
         <tr>
-            <th>Name</th>
-            <th>Password</th>
-            <th>Phone</th>
+            <th th:utext="#{user.name.field}"></th>
+            <th th:utext="#{user.password.field}"></th>
+            <th th:utext="#{user.phone.field}"></th>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <th>Delete</th>
+                <th th:utext="#{delete.button}"></th>
             </div>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
-                <th>Change Role</th>
+                <th th:utext="#{userList.changeRole}"></th>
             </div>
         </tr>
         <tr th:each ="user : ${users}">
@@ -29,15 +29,15 @@
             <td th:utext="${user.phoneNumber}">...</td>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <td>
-                    <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
-                        <button type="submit" onClick="return confirm('sure?')">Delete</button>
+                    <form th:action="@{/adminDeleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
+                        <button type="submit" onClick="return confirm('sure?')" th:utext="#{delete.button}"></button>
                     </form>
                 </td>
             </div>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <td>
                     <form th:action="@{/changeRole/{id}(id=${user.userId})}">
-                        <button type="submit" onClick="return confirm('sure?')">Make Admin</button>
+                        <button type="submit" onClick="return confirm('sure?')" th:utext="#{userList.changeRole}"></button>
                     </form>
                 </td>
             </div>

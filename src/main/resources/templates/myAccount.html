@@ -2,39 +2,39 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>My Account</title>
+    <title th:utext="#{myAccount.title}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<h1>My Info</h1>
+<h1 th:utext="#{myAccount.show}"></h1>
 <br/><br/>
 <div>
     <table border="1">
         <tr>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Delete</th>
-            <th>Update Info</th>
-            <th>Change Password</th>
+            <th th:utext="#{user.name.field}"></th>
+            <th th:utext="#{user.phone.field}"></th>
+            <th th:utext="#{change.phone.title}"></th>
+            <th th:utext="#{change.password.title}"></th>
+            <th th:utext="#{delete.button}">Delete</th>
         </tr>
         <tr th:each ="user : ${user}">
             <td th:utext="${user.username}">...</td>
             <td th:utext="${user.phoneNumber}">...</td>
             <td>
-                <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
-                    <button type="submit" onClick="return confirm('sure?')">Delete</button>
-                </form>
-            </td>
-            <td>
                 <form th:action="@{/changePhone/{id}(id=${user.userId})}" th:object="${user}">
-                    <button type="submit">Change Phone Number</button>
+                    <button type="submit" th:utext="#{myAccount.changePhone}"></button>
                 </form>
             </td>
             <td>
                 <form th:action="@{/changePassword/{id}(id=${user.userId})}" th:object="${user}">
-                    <button type="submit">Change Password</button>
+                    <button type="submit" th:utext="#{myAccount.changePassword}"></button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/deleteUser/{id}(id=${user.userId})}" th:object="${user}" method="post">
+                    <button type="submit" onClick="return confirm('sure?')" th:utext="#{myAccount.delete}"></button>
                 </form>
             </td>
         </tr>

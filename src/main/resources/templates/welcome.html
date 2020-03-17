@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}" th:lang="${lang}">
 <head>
     <meta charset="utf-8">
-    <title>Welcome</title>
+    <title th:utext="#{welcome.title}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+
+<div style="text-align: right;padding:5px;margin:5px 0px;background:#ccc;">
+    <a th:href="@{/welcome?lang=en}" th:utext="#{language.english}"></a>
+    &nbsp;|&nbsp;
+    <a th:href="@{/welcome?lang=ru}" th:utext="#{language.russian}"></a>
+</div>
+
 <div class="container">
     <div th:if="${#request.userPrincipal.name} != null">
         <form id="logoutForm" method="POST" th:action="@{/logout}">
@@ -17,31 +24,31 @@
         </form>
 
         <div>
-            <h2> Hello, <nobr sec:authentication="name"></nobr> | <a th:href onclick="document.forms['logoutForm'].submit()">Click to Logout</a></h2>
+            <h2> <nobr th:utext="#{welcome.hello.message}"></nobr> , <nobr sec:authentication="name"></nobr> | <a th:href onclick="document.forms['logoutForm'].submit()" th:utext="#{welcome.logout.message}"></a></h2>
         </div>
 
         <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a th:href="@{/userList}">User List</a>
+            <a th:href="@{/userList}" th:utext="#{welcome.href.userList}"></a>
         </div>
 
         <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a th:href="@{/addFood}">Add Food</a>
+            <a th:href="@{/addFood}" th:utext="#{welcome.href.addFood}"></a>
         </div>
 
         <div sec:authorize="hasRole('ROLE_ADMIN')">
-            <a th:href="@{/foodList}">Food List</a>
+            <a th:href="@{/foodList}" th:utext="#{welcome.href.foodList}"></a>
         </div>
 
         <div>
-            <a th:href="@{/menu}">Menu</a>
+            <a th:href="@{/menu}" th:utext="#{welcome.href.menu}"></a>
         </div>
 
         <div>
-            <a th:href="@{/myBasket}">My Basket</a>
+            <a th:href="@{/myBasket} " th:utext="#{welcome.href.myBasket}"></a>
         </div>
 
         <div>
-            <a th:href="@{/myAccount}">My Account</a>
+            <a th:href="@{/myAccount}" th:utext="#{welcome.href.myAccount}"></a>
         </div>
 
         <!--<div sec:authorize=”isAuthenticated()”>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Change Phone</title>
+    <title th:utext="#{change.phone.title}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -14,7 +14,7 @@
         <div class="container">
 
 
-            <h2 class="form-signin-heading">Change Phone</h2>
+            <h2 class="form-signin-heading" th:utext="#{change.phone.title}"></h2>
 
             <div class="form-group col-md-6">
                 <input type="hidden" th:field="*{username}"/>
@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label for="phoneNumber">Phone Number</label>
+                <label for="phoneNumber" th:utext="#{user.phone.field}"></label>
                 <input type="text" class="form-control" id="phoneNumber" placeholder="Phone" th:field="*{phoneNumber}"/>
                 <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
                    style="color: red; font-style:italic;">
@@ -39,7 +39,7 @@
                 <input type="hidden" th:field="*{passwordConfirm}"/>
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="return confirm('sure?')">Submit
+            <button class="btn btn-lg btn-primary btn-block" type="submit" onClick="return confirm('sure?')" th:utext="#{confirm.button}">
             </button>
         </div>
     </form>

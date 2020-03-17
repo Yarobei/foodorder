@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Menu By Category</title>
+    <title th:utext="#{getOrder.title}"></title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,18 +14,18 @@
     <li th:utext="${food.name}">...</li>
         <ul>
             <li><img th:src="@{/productImage/{id}(id=${food.foodId})}" th:width="120px" th:height="80px"></li>
-            <h6>Price<li th:utext="${food.price}">...</li></h6>
-            <h6>Discount<li th:utext="${food.discount}">...</li></h6>
+            <h6 th:utext="#{food.price.field}"></h6><li th:utext="${food.price} + ' BYN'">...</li>
+            <h6 th:utext="#{food.discount.field}"></h6><li th:utext="${food.discount} + ' %'">...</li>
         </ul>
 </ul>
 
     <h2>
-        Total Price: <nobr th:utext="${sum}"></nobr>
+        <nobr th:utext="#{getOrder.price}"></nobr><nobr th:utext="${sum} + ' BYN'"></nobr>
     </h2>
 
 <div>
     <form th:action="@{/confirmOrder}">
-        <button type="submit">Confirm</button>
+        <button type="submit" th:utext="#{confirm.button}"></button>
     </form>
 </div>
 

@@ -37,6 +37,9 @@ public class FoodServiceImpl implements FoodService {
         log.info("Add new food: {}", food);
         food.setCategory(categoryService.getCategoryById(food.getCategory().getCategoryId()));
         saveImage(food);
+        if(food.getDiscount()==null){
+            food.setDiscount(0D);
+        }
         return foodRepository.save(food);
     }
 
