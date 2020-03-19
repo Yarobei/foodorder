@@ -39,6 +39,11 @@ public class UserValidator implements Validator {
         if(!user.getPasswordConfirm().equals(user.getPassword())){
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
         }
+
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNumber", "NotEmpty");
+        if(!user.getPhoneNumber().matches("(^\\+{1}375)([0-9]{2})([0-9]{3})([0-9]{2})([0-9]{2}$)")){
+            errors.rejectValue("phoneNumber", "PhoneNumber.form.error");
+        }
     }
 
 }

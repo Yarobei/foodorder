@@ -9,6 +9,9 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+
+<th:block th:include="/header"></th:block>
+
 <form method="POST" th:action="@{/changePhone}" th:object="${user}" class="form-signin">
     <form>
         <div class="container">
@@ -45,6 +48,7 @@
     </form>
 </form>
 
+<th:block th:include="/footer"></th:block>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

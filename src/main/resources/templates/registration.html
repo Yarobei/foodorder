@@ -12,6 +12,8 @@
 
 <body>
 
+<th:block th:include="/header"></th:block>
+
 <div class="container">
 
     <form method="POST" th:action="@{/registration}" th:object="${userForm}" class="form-signin">
@@ -50,6 +52,8 @@
     </form>
 
 </div>
+
+<th:block th:include="/footer"></th:block>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

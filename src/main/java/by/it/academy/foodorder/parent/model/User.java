@@ -33,8 +33,6 @@ public class User {
     @Column
     private String password;
 
-    @Pattern(regexp = "(^\\+{1}375)([0-9]{2})([0-9]{3})([0-9]{2})([0-9]{2}$)",
-            message =  "Invalid phone number")
     private String phoneNumber;
 
     @Transient

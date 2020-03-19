@@ -4,6 +4,7 @@ import by.it.academy.foodorder.parent.model.Category;
 import by.it.academy.foodorder.parent.model.Food;
 import by.it.academy.foodorder.parent.services.interfaces.CategoryService;
 import by.it.academy.foodorder.parent.services.interfaces.FoodService;
+import by.it.academy.foodorder.parent.validator.FoodValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class FoodController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private FoodValidator foodValidator;
+
     @RequestMapping(value = "/foodList", method = RequestMethod.GET)
     public String foodList(Model model){
         List<Food> foodList = foodService.getAllDishes();
@@ -44,6 +48,8 @@ public class FoodController {
 
     @RequestMapping(value = "/addFood", method = RequestMethod.POST)
     public String addFood(Model model, @ModelAttribute @Valid Food food, BindingResult bindingResult){
+        foodValidator.validate(food, bindingResult);
+
         if(bindingResult.hasErrors()){
             List<Category> list = categoryService.getAllCategories();
             model.addAttribute("category", list);

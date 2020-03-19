@@ -10,6 +10,8 @@
 </head>
 <body>
 
+<th:block th:include="/header"></th:block>
+
 <ul th:each="food : ${order}">
     <li th:utext="${food.name}">...</li>
         <ul>
@@ -28,6 +30,8 @@
         <button type="submit" th:utext="#{confirm.button}"></button>
     </form>
 </div>
+
+<th:block th:include="/footer"></th:block>
 
 </body>
 </html>

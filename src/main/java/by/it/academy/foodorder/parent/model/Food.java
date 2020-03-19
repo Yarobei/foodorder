@@ -32,25 +32,18 @@ public class Food {
     private MultipartFile fileData;
 
     @Column
-    @NotNull
-    @Size(min = 4, max = 50, message = "Incorrect food name")
     private String name;
 
     @Column
-    @NotNull(message = "Incorrect price")
     private Double price;
 
     @Column
-    @NotNull(message = "Incorrect cooking time")
     private Integer cookingTime;
 
     @Column
-    @NotNull
-    @Size(min = 5, max = 255, message = "Incorrect food ingredients")
     private String ingredients;
 
     @Column
-    @NotNull(message = "Incorrect weight")
     private Double weight;
 
     @Column
@@ -58,7 +51,6 @@ public class Food {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
-    @NotNull(message = "Please choose category")
     private Category category;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

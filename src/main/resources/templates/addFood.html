@@ -18,6 +18,9 @@
 
 </head>
 <body>
+
+<th:block th:include="/header"></th:block>
+
 <form th:action="@{/addFood}" th:object="${food}" method="post" enctype="multipart/form-data">
     <form>
         <div class="container">
@@ -98,6 +101,7 @@
     </form>
 </form>
 
+<th:block th:include="/footer"></th:block>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
