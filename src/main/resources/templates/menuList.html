@@ -11,7 +11,8 @@
 
 <th:block th:include="/header"></th:block>
 
-<table border="1">
+<table class="table" style="width: 80%; margin: auto; border: 1px solid black">
+    <thead class="thead-light">
     <tr>
         <th th:utext="#{food.image.field}"></th>
         <th th:utext="#{food.name.field}"></th>
@@ -22,6 +23,8 @@
         <th th:utext="#{food.weight.field}"></th>
         <th th:utext="#{food.discount.field}"></th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each ="food : ${menuByCategory}">
         <td><img th:src="@{/productImage/{id}(id=${food.foodId})}" th:width="120px" th:height="80px"/></td>
         <td th:utext="${food.name}">...</td>
@@ -51,6 +54,7 @@
             </td>
         </div>
     </tr>
+    </tbody>
 </table>
 
 <th:block th:include="/footer"></th:block>
