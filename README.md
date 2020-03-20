@@ -2,7 +2,7 @@
 <h2>Requirements</h2>
 For building and running the application you need:
 <ul>
-  <li>JDK 11 or higher</li>
+  <li>JDK 13 or higher</li>
   <li>Maven</li>
   <li>MySQL(make sure you change username, password and url in application.properties on your setting)</li>
   <li>Tomcat(Spring Boot using 9.0.31 by default(20.03.2020))</li>
