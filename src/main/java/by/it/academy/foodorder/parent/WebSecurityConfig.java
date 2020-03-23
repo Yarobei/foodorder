@@ -30,8 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/addFood", "/foodList"
-                , "/foodList", "/foodList", "/updateFood", "/userList")
+        http.authorizeRequests().antMatchers("/addFood", "/foodList/**"
+                , "/updateFood/**", "/userList/**")
                                             .access("hasRole('ROLE_ADMIN')");
 
         http.authorizeRequests().antMatchers("/changePassword", "/changePhone", "/myAccount"

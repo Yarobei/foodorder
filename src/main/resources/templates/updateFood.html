@@ -10,102 +10,113 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title th:utext="#{updateFood.title}"></title>
 
-    <style type="text/css">
-        .container {
-            float: left
-        }
-    </style>
 
 </head>
 <body>
+<div id="main">
+    <div id="wrap">
 
-<th:block th:include="/header"></th:block>
+        <th:block th:include="/header"></th:block>
 
-<form th:action="@{/updateFood}" th:object="${food}" method="post" enctype="multipart/form-data">
-    <form>
-        <div class="container">
+        <form th:action="@{/updateFood}" th:object="${food}" method="post" enctype="multipart/form-data">
+            <form>
 
-            <div class="form-row">
+                <div class="form-row">
                     <input type="hidden" class="form-control" id="id" placeholder="name" th:field="*{foodId}">
-            </div>
+                </div>
 
-            <div class="form-group">
-                <label class="col-md-3 control-label" th:utext="#{food.category.field}"></label>
-                <div class="col-md-5">
-                    <div th:if="${category != null and not #lists.isEmpty(category)}">
-                        <select class="custom-select custom-select-lg mb-3" th:field="*{category}">
-                            <option th:each="category : ${category}"
-                                    th:value="${category.categoryId}"
-                                    th:text="${category.categoryName}">
-                            </option>
-                        </select>
-                    </div>
-                    <div th:if="${category == null or #lists.isEmpty(category)}">
-                        <div th:utext="#{updateFood.error.category}"></div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" th:utext="#{food.category.field}"></label>
+                    <div class="col-md-5">
+                        <div th:if="${category != null and not #lists.isEmpty(category)}">
+                            <select class="custom-select custom-select-lg mb-3" th:field="*{category}">
+                                <option th:each="category : ${category}"
+                                        th:value="${category.categoryId}"
+                                        th:text="${category.categoryName}">
+                                </option>
+                            </select>
+                        </div>
+                        <div th:if="${category == null or #lists.isEmpty(category)}">
+                            <div th:utext="#{updateFood.error.category}"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div>
-                <label class="ui-icon-image"><b th:utext="#{food.image.field}"></b></label>
+                <div>
+                    <label class="ui-icon-image"><b th:utext="#{food.image.field}"></b></label>
+                    <br/>
+                    <img th:src="@{/productImage/{id}(id=${food.foodId})}"/>
+                    <input type="file" th:field="*{fileData}"/>
+                </div>
                 <br/>
-                <img th:src="@{/productImage/{id}(id=${food.foodId})}"/>
-                <input type="file" th:field="*{fileData}"/>
-            </div>
-            <br/>
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="name" th:utext="#{food.name.field}"></label>
-                    <input type="text" class="form-control" id="name" placeholder="name" th:field="*{name}">
-                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red; font-style:italic;">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name" th:utext="#{food.name.field}"></label>
+                        <input type="text" class="form-control" id="name" placeholder="name" th:field="*{name}">
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                           style="color: red; font-style:italic;">
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="price" th:utext="#{food.price.field}"></label>
-                    <input type="text" class="form-control" id="price" placeholder="price" th:field="*{price}">
-                    <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}" style="color: red; font-style:italic;">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="price" th:utext="#{food.price.field}"></label>
+                        <input type="text" class="form-control" id="price" placeholder="price" th:field="*{price}">
+                        <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                           style="color: red; font-style:italic;">
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="cookingTime" th:utext="#{food.cookingTime.field}"></label>
-                    <input type="text" class="form-control" id="cookingTime" placeholder="cookingTime"
-                           th:field="*{cookingTime}">
-                    <p th:if="${#fields.hasErrors('cookingTime')}" th:errors="*{cookingTime}" style="color: red; font-style:italic;">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="cookingTime" th:utext="#{food.cookingTime.field}"></label>
+                        <input type="text" class="form-control" id="cookingTime" placeholder="cookingTime"
+                               th:field="*{cookingTime}">
+                        <p th:if="${#fields.hasErrors('cookingTime')}" th:errors="*{cookingTime}"
+                           style="color: red; font-style:italic;">
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="ingredients" th:utext="#{food.ingredients.field}"></label>
-                    <input type="text" class="form-control" id="ingredients" placeholder="ingredients"
-                           th:field="*{ingredients}">
-                    <p th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}" style="color: red; font-style:italic;">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="ingredients" th:utext="#{food.ingredients.field}"></label>
+                        <input type="text" class="form-control" id="ingredients" placeholder="ingredients"
+                               th:field="*{ingredients}">
+                        <p th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"
+                           style="color: red; font-style:italic;">
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="weight" th:utext="#{food.weight.field}"></label>
-                    <input type="text" class="form-control" id="weight" placeholder="weight" th:field="*{weight}">
-                    <p th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" style="color: red; font-style:italic;">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="weight" th:utext="#{food.weight.field}"></label>
+                        <input type="text" class="form-control" id="weight" placeholder="weight" th:field="*{weight}">
+                        <p th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}"
+                           style="color: red; font-style:italic;">
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <label for="discount" th:utext="#{food.discount.field}"></label>
-                    <input type="text" class="form-control" id="discount" placeholder="discount" th:field="*{discount}">
-                    <p th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}" style="color: red; font-style:italic;">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="discount" th:utext="#{food.discount.field}"></label>
+                        <input type="text" class="form-control" id="discount" placeholder="discount"
+                               th:field="*{discount}">
+                        <p th:if="${#fields.hasErrors('discount')}" th:errors="*{discount}"
+                           style="color: red; font-style:italic;">
+                    </div>
                 </div>
-            </div>
 
-            <button type="submit" class="btn btn-primary" onClick="return confirm('sure?')" th:utext="#{update.button}"></button>
-        </div>
-    </form>
-</form>
+                <button type="submit" class="btn btn-primary" onClick="return confirm('sure?')"
+                        th:utext="#{update.button}"></button>
 
-<th:block th:include="/footer"></th:block>
+            </form>
+        </form>
+
+    </div>
+
+</div>
+
+<div id="footer">
+    <th:block th:include="/_footer"></th:block>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

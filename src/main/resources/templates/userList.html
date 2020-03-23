@@ -11,13 +11,13 @@
 
 <th:block th:include="/header"></th:block>
 
-<h1 th:utext="#{userList.title}"></h1>
+<h1 th:utext="#{userList.title}" style="text-align: center"></h1>
 <br/><br/>
 <div>
-    <table border="1">
+    <table class="table" style="width: 80%; margin: auto; border: 1px solid black">
+        <thead class="thead-light">
         <tr>
             <th th:utext="#{user.name.field}"></th>
-            <th th:utext="#{user.password.field}"></th>
             <th th:utext="#{user.phone.field}"></th>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <th th:utext="#{delete.button}"></th>
@@ -26,9 +26,10 @@
                 <th th:utext="#{userList.changeRole}"></th>
             </div>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each ="user : ${users}">
             <td th:utext="${user.username}">...</td>
-            <td th:utext="${user.password}">...</td>
             <td th:utext="${user.phoneNumber}">...</td>
             <div sec:authorize="hasRole('ROLE_ADMIN')">
                 <td>
@@ -45,6 +46,7 @@
                 </td>
             </div>
         </tr>
+        </tbody>
     </table>
 </div>
 

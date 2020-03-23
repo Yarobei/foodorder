@@ -11,18 +11,22 @@
 
 <th:block th:include="/header"></th:block>
 
-<h1 th:utext="#{menu.categories}"></h1>
+<h1 th:utext="#{menu.categories}" style="text-align: center"></h1>
 
 <div>
-    <table border="1">
+    <table class="table" style="width: 80%; margin: auto; border: 1px solid black">
+        <thead class="thead-light">
         <tr>
             <th th:utext="#{food.category.field}"></th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each="category : ${menu}">
             <td>
                 <a th:utext="${category.categoryName}" th:href="@{/menu/{categoryName}(categoryName=${category.categoryName})}">...</a>
             </td>
         </tr>
+        </tbody>
     </table>
 </div>
 

@@ -11,12 +11,12 @@
 
 <th:block th:include="/header"></th:block>
 
-<h1 th:utext="#{foodList.title}"></h1>
-<br/><br/>
-<a th:href="@{/addFood}" th:utext="#{add.food.title}"></a>
-<br/>
+<h1 th:utext="#{foodList.title}" style="text-align: center"></h1>
+
 <div>
-    <table border="1">
+    <table class="table" style="width: 80%; margin: auto; border: 1px solid black">
+        <h5 style="text-align: center"><a th:href="@{/addFood}" th:utext="#{add.food.title}"></a></h5>
+        <thead class="thead-light">
         <tr>
             <th th:utext="#{food.image.field}"></th>
             <th th:utext="#{food.name.field}"></th>
@@ -26,7 +26,11 @@
             <th th:utext="#{food.cookingTime.field}"></th>
             <th th:utext="#{food.weight.field}"></th>
             <th th:utext="#{food.discount.field}"></th>
+            <th th:utext="#{delete.button}"></th>
+            <th th:utext="#{update.button}"></th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each ="food : ${foodList}">
             <td><img th:src="@{/productImage/{id}(id=${food.foodId})}" th:width="120px" th:height="80px"/></td>
             <td th:utext="${food.name}">...</td>
@@ -51,6 +55,7 @@
                 </td>
             </div>
         </tr>
+        </tbody>
     </table>
 </div>
 

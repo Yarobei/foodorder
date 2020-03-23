@@ -11,10 +11,11 @@
 
 <th:block th:include="/header"></th:block>
 
-<h1 th:utext="#{myAccount.show}"></h1>
+<h1 th:utext="#{myAccount.show}" style="text-align: center"></h1>
 <br/><br/>
 <div>
-    <table border="1">
+    <table class="table" style="width: 80%; margin: auto; border: 1px solid black">
+        <thead class="thead-light">
         <tr>
             <th th:utext="#{user.name.field}"></th>
             <th th:utext="#{user.phone.field}"></th>
@@ -22,6 +23,8 @@
             <th th:utext="#{change.password.title}"></th>
             <th th:utext="#{delete.button}">Delete</th>
         </tr>
+        </thead>
+        <tbody>
         <tr th:each ="user : ${user}">
             <td th:utext="${user.username}">...</td>
             <td th:utext="${user.phoneNumber}">...</td>
@@ -41,6 +44,7 @@
                 </form>
             </td>
         </tr>
+        </tbody>
     </table>
 
 </div>
