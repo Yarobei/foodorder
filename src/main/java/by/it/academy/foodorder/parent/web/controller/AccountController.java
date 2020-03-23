@@ -3,6 +3,7 @@ package by.it.academy.foodorder.parent.web.controller;
 import by.it.academy.foodorder.parent.model.User;
 import by.it.academy.foodorder.parent.services.interfaces.UserService;
 import by.it.academy.foodorder.parent.validator.PasswordValidator;
+import by.it.academy.foodorder.parent.validator.PhoneValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,6 +31,9 @@ public class AccountController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    private PhoneValidator phoneValidator;
+
     @RequestMapping(value = "/myAccount")
     public String account(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -54,6 +58,8 @@ public class AccountController {
 
     @RequestMapping(value = "/changePhone", method = RequestMethod.POST)
     public String changePhone(@ModelAttribute @Valid User user, BindingResult bindingResult){
+
+        phoneValidator.validate(user, bindingResult);
 
         if(bindingResult.hasErrors()){
             return "changePhone";
