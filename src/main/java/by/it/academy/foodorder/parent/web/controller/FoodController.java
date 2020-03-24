@@ -89,12 +89,19 @@ public class FoodController {
     }
 
     @RequestMapping(value = "/updateFood", method = RequestMethod.POST)
-    public String postUpdateFood(@ModelAttribute @Valid Food food, BindingResult bindingResult){
+    public String postUpdateFood(Model model, @ModelAttribute @Valid Food food, BindingResult bindingResult) throws Exception{
+        foodValidator.validate(food, bindingResult);
 
         if(bindingResult.hasErrors()){
+            List<Category> list = categoryService.getAllCategories();
+            model.addAttribute("category", list);
             return "updateFood";
         }
-
+        byte[] image;
+        image = foodService.getByFoodId(food.getFoodId()).getImage();
+        if (image != null && image.length > 0) {
+            food.setImage(image);
+        }
         foodService.save(food);
         return "redirect:/menu";
     }
