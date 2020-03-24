@@ -43,9 +43,9 @@
     </tbody>
 </table>
 
-<div th:if="${basket.size()>0}">
+<div th:if="${basket.size()>0}" style="text-align: center">
     <form th:action="@{/getOrder}">
-        <button type="submit" th:utext="#{myBasket.getOrder.button}"></button>
+        <button type="submit" th:utext="#{myBasket.getOrder.button}" style="position:absolute;"></button>
     </form>
 </div>
 
